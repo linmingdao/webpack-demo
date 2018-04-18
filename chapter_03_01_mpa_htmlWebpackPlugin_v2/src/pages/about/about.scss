@@ -1,0 +1,6 @@
+@import '../../common/utils.scss';
+#app {
+    background-color: #eb9999;
+    @include text-align(center);
+    @include rounded-corners(5px);
+}
