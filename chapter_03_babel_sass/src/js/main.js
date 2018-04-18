@@ -1,5 +1,5 @@
 // 通过 ES6 规范导入 CSS 模块
-import '../style/style.css';
+import '../style/style.scss';
 
 // 通过 ES6 规范导入 show 函数
 import {

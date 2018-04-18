@@ -25,12 +25,13 @@ module.exports = {
             exclude: /node_modules/,
             loader: "babel-loader"
         }, {
-            // 用正则去匹配要用该 loader 转换的 CSS 文件
-            test: /\.css$/,
+            // 用正则去匹配要用该loader转换的scss文件
+            test: /\.scss$/,
+            exclude: /node_modules/,
             use: ExtractTextPlugin.extract({
-                // 转换 .css 文件需要使用的 Loader
-                use: ['css-loader'],
-            }),
+                // 转换.scss文件需要使用的 Loader
+                use: ['css-loader', 'sass-loader'],
+            })
         }]
     },
     plugins: [
