@@ -1,0 +1,7 @@
+@import '../../common/utils.scss';
+$purple: #e07ff1;
+#app {
+    background-color: $purple;
+    @include text-align(center);
+    @include rounded-corners(0px);
+}
