@@ -1,5 +1,7 @@
 const path = require('path');
 const Webpack = require('webpack');
+const UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin');
+const DefinePlugin = require('webpack/lib/DefinePlugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -24,12 +26,12 @@ module.exports = {
             test: /\.css$/,
             use: ExtractTextPlugin.extract({
                 // 转换 .css 文件需要使用的 Loader
-                use: ['css-loader'],
+                use: ['css-loader?minimize'],
             }),
         }]
     },
     plugins: [
-        // 从 .js 文件中提取出来的 .css 文件的名称
+        // 从.js文件中提取出来的.css文件的名称
         new ExtractTextPlugin({
             filename: `style/[name].[contenthash:8].css`
         }),
@@ -37,6 +39,23 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: './src/index.html',
             filename: 'index.html'
+        }),
+        new DefinePlugin({
+            // 定义NODE_ENV环境变量为production，以去除源码中只有开发时才需要的部分
+            'process.env': {
+                NODE_ENV: JSON.stringify('production')
+            }
+        }),
+        // 压缩输出的js代码
+        new UglifyJsPlugin({
+            beautify: false,
+            comments: false,
+            compress: {
+                warnings: false,
+                drop_console: true,
+                collapse_vars: true,
+                reduce_vars: true
+            }
         })
     ]
 };

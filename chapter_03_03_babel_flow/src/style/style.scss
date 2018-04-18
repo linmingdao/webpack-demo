@@ -1,0 +1,12 @@
+$blue: #6097f0;
+@mixin rounded-corners($value: 5px) {
+    -moz-border-radius: $value;
+    -webkit-border-radius: $value;
+    border-radius: $value;
+}
+
+#app {
+    text-align: center;
+    background-color: $blue;
+    @include rounded-corners(5px);
+}
